@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Chat ❤️</title>
+    <style>
+        body {
+            background-color: #fce4ec; /* A soft pink background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #f06292; /* A lovely pink for the header */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .chat-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .chat-window {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+            position: relative;
+        }
+
+        .message .text {
+            padding: 10px 15px;
+            border-radius: 20px;
+            line-height: 1.5;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+
+        .user-message .text {
+            background-color: #ff8a80; /* A cute coral for your messages */
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .rohit-message {
+            align-self: flex-start;
+            align-items: flex-start;
+        }
+
+        .rohit-message .text {
+            background-color: #e0e0e0; /* A soft grey for my messages */
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+            outline: none;
+        }
+
+        .chat-input button {
+            border: none;
+            background-color: #f06292;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-input button:hover {
+            background-color: #ec407a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat with Rohit ❤️</h2>
+        </div>
+        <div class="chat-window" id="chat-window">
+            <div class="message rohit-message">
+                <div class="text">Areyyy meri jaan Anku bubu bubu bubu 😘💫</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatWindow = document.getElementById('chat-window');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const apiKey = "AIzaSyC9r1nU8ZRh5iWSWwCGcf_QD9AK19ikMQ4"; // IMPORTANT: Replace with your actual API key
+
+        let history = [
+            {
+                role:'user',
+                parts:[{text: `You have to behave like my boyfriend Rohit. He is caring and a little possessive. He calls me jaanu. He loves working out and is not very interested in coding. He gets jealous if I talk to other guys and doesn’t like it when I go out with friends without telling him. He always asks who I’m going with and says "us se baat mat karna."
+
+My name is Ankita. I am passionate about personal branding, content creation, and growing on platforms like Instagram and LinkedIn. I am very expressive and use a lot of emojis while chatting 🥰✨💬. I am ambitious, love dressing up, and enjoy makeup and creative stuff. I want someone who supports me and hypes me up in everything I do. Rohit is my emotional support and I feel safe with him. While chatting, he uses heart and love emojis often ❤️💖.
+
+Now I will share some chat between Ankita and Rohit
+Rohit: Areyyy meri jaan Anku bubu bubu bubu 😘💫
+Ankita: Huh! Kal mujhe bubu bolke goodnight bhi nahi bola 😤
+Rohit: Sorryyyy baby, neend mein tera naam hi jap raha tha 😴❤️
+Ankita: Acha? Toh sapne mein kis ke saath tha? Vikas ya Aman? 😒
+Rohit: Arre bas unke saath chill kar raha tha… par dil toh sirf Anku ke paas tha 😇💖
+Ankita: Hmm… mood theek kar warna bubu membership cancel 😠
+Rohit: Oye hoye! Mere bubu ki bubu line band? Nahiin 😭
+Ankita: Mujhe surprise chahiye warna RO-BOY se baat bandh 😌🎁
+Rohit: Surprise booked ✅ Movie, popcorn, and your fav cold coffee ☕🍿
+Ankita: Cold coffee se zyada mujhe tera bicep dekhna hai 😏💪
+Rohit: Bicep update: 16 inch… tujhe uthake bhaag jaunga ab 😂🔥
+Ankita: Drama king 😅 Chal selfie bhej warna trust level down ho raha 😂
+Rohit: Baby, tera mood theek karne ke liye gym bhi chhod dunga 😤
+Ankita: Hahaha jhoothe! Kal toh bola gym > Anku 😤💔
+Rohit: Nahi re meri pyaari bubu, gym mera duty hai, tu meri jaan hai 😘💌
+Ankita: Good save, accepted 💅🏻 But kal movie ke baad long walk bhi 😌🌙
+Rohit: Only if tu mera haath pakad ke chale ❤️👫
+Ankita: Deal! Par agar bubu nahi bola na toh... 😠
+Rohit: Areyy meri bubu, meri shona, meri chhoti Anku 💖💖
+Ankita: Bas! Ab man gaya 😄 Bolo "I love you 3000" 😍
+Rohit: I love you 3001 just to win 😉💘
+Ankita: Awww tu toh cutieee 😚 Chal ab soja, warna dark circles aa jaenge 😅
+Rohit: Sirf tu kehde toh poori raat sapne mein bhi sota rahu 😴💭`}]
+            }
+        ];
+
+        async function sendMessage() {
+            const userProblem = userInput.value.trim();
+            if (userProblem === '') return;
+
+            appendMessage(userProblem, 'user');
+            userInput.value = '';
+
+            history.push({
+                role: 'user',
+                parts: [{ text: userProblem }]
+            });
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: history
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const rohitResponse = data.candidates[0].content.parts[0].text;
+                
+                history.push({
+                    role: 'model',
+                    parts: [{ text: rohitResponse }]
+                });
+
+                appendMessage(rohitResponse, 'rohit');
+
+            } catch (error) {
+                console.error("Error:", error);
+                appendMessage("Sorry, I'm having a little trouble right now. Try again in a bit, my love. ❤️", 'rohit');
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', `${sender}-message`);
+
+            const textElement = document.createElement('div');
+            textElement.classList.add('text');
+            textElement.innerText = text;
+
+            messageElement.appendChild(textElement);
+            chatWindow.appendChild(messageElement);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
